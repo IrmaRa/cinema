@@ -1,6 +1,7 @@
 require_relative('../db/sql_runner')
 require_relative('./customer')
 
+
 class Film
 
   attr_reader :id
@@ -40,10 +41,18 @@ class Film
   end
 
   def number_of_customers()
-   sql = "SELECT customers.* FROM customers
-   INNER JOIN tickets ON tickets.customer_id = customers.id
-   WHERE film_id = #{@id}"
-   return Customer.get_many(sql).count
+    return customers.count
+  end
+
+  def screenings()
+    sql = "SELECT * FROM screenings 
+    WHERE film_id = #{@id}"
+    return Screening.get_many(sql)
+  end
+
+  def delete()
+    sql = "DELETE FROM films WHERE id = #{@id}"
+    SqlRunner.run(sql)
   end
 
   def Film.all()

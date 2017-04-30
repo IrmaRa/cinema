@@ -31,21 +31,12 @@ class Ticket
     sql = "UPDATE tickets SET (customer_id, film_id) = (#{@customer_id}, #{@film_id})
     WHERE id = #{@id}"
     SqlRunner.run(sql)
-  end
+  end  
 
-  # def customer()
-  #   sql = "SELECT * FROM customers
-  #   WHERE id = #{@customer_id}"
-  #   customer = SqlRunner.run(sql)[0]
-  #   return Customer.new(customer)
-  # end
-
-  # def film()
-  #   sql = "SELECT * FROM films
-  #   WHERE id = #{@film_id}"
-  #   film = SqlRunner.run(sql)[0]
-  #   return Film.new(film)
-  # end
+  def delete()
+    sql = "DELETE FROM tickets WHERE id = #{@id}"
+    SqlRunner.run(sql)
+  end    
 
   def Ticket.all()
     sql = "SELECT * FROM tickets"

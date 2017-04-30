@@ -46,10 +46,12 @@ class Customer
   end
 
   def tickets()
-    sql = "SELECT films.* FROM films
-    INNER JOIN tickets ON tickets.film_id = films.id
-    WHERE customer_id = #{@id}"
-    return Film.get_many(sql).count
+    return films.count
+  end
+
+  def delete()
+    sql = "DELETE FROM customers WHERE id = #{@id}"
+    SqlRunner.run(sql)
   end
 
   def Customer.all()
